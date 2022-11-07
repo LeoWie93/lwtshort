@@ -13,11 +13,12 @@ datasource db {
 }
 
 model shortLink {
-  id        Int      @id @default(autoincrement())
-  slug      String   @unique
-  url       String   @db.VarChar(2000)
-  clicked   Int      @default(0)
-  createdAt DateTime @default(now())
+  id              Int      @id @default(autoincrement())
+  slug            String   @unique
+  url             String   @db.VarChar(2000)
+  clicked         Int      @default(0)
+  createdAt       DateTime @default(now())
+  lastTimeClicked DateTime @default(now())
 
   @@index([slug])
 }
