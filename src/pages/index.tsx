@@ -4,8 +4,14 @@ import Image from "next/image";
 import githubLogo from "../public/assets/github.png";
 
 export default function Home() {
-  const [apiResponse, setApiResponse] = React.useState(null);
-  const [errorMessage, setErrorMessage] = React.useState(null);
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const [apiResponse, setApiResponse] = React.useState({
+    message: "",
+    data: {
+      slug: "",
+    },
+  });
+  const [errorMessage, setErrorMessage] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
   const handleSubmit = (event: any) => {
@@ -33,7 +39,7 @@ export default function Home() {
   const storeIntoClipboard = () => {
     if (!apiResponse) return;
 
-    const fullShrtLink = window.location.href + apiResponse.data.slug;
+    const fullShrtLink = baseUrl + apiResponse.data.slug;
     navigator.clipboard.writeText(fullShrtLink);
   };
 
@@ -79,7 +85,7 @@ export default function Home() {
         </h2>
 
         <div className="max-w-lg m-auto mt-6 w-[100%]">
-          {!apiResponse && (
+          {!apiResponse.message && (
             <form
               onSubmit={handleSubmit}
               method="POST"
@@ -116,14 +122,14 @@ export default function Home() {
             </form>
           )}
 
-          {apiResponse && (
+          {apiResponse.message && (
             <div className="bg-violet-50 rounded-md h-20 w-80 text-center m-auto mt-5 text-black">
               {apiResponse.message}{" "}
               <div
                 className="text-purple-600 text-bold cursor-pointer"
                 onClick={storeIntoClipboard}
               >
-                {window.location.href + apiResponse.data.slug}
+                {baseUrl + apiResponse.data.slug}
               </div>
             </div>
           )}
