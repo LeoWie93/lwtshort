@@ -3,8 +3,7 @@ import { PrismaClient } from "@prisma/client";
 
 type Data = {
   status: number;
-  message?: string;
-  error?: string;
+  message: string;
   data?: {};
 };
 
@@ -19,7 +18,8 @@ export default async function handler(
     });
   }
 
-  const body = req.body;
+  const body = JSON.parse(req.body);
+
   if (body.url === null || typeof body.url !== "string") {
     return res
       .status(500)
@@ -29,7 +29,7 @@ export default async function handler(
   if (!isValidUrl(body.url)) {
     return res.status(500).json({
       status: 5000,
-      error: `${body.url} is not a valid url. Please correct your input.`,
+      message: `"${body.url}" is not a valid url. Please correct your input.`,
     });
   }
 
@@ -59,6 +59,7 @@ export default async function handler(
 
   return res.json({
     status: 2000,
+    message: "New Shortlink: ",
     data: shrtLink,
   });
 }
