@@ -3,9 +3,26 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    margin: 0;
+    height: 100%;
+  }
   body {
+    min-height: 100%;
     @apply bg-slate-800;
     @apply text-yellow-50;
+  }
+
+  .primary-btn {
+    @apply w-40 m-auto  bg-purple-500 hover:bg-purple-700 text-white py-2 px-4 rounded;
+  }
+
+  .btn-state-default {
+    cursor: pointer;
+  }
+
+  .btn-state-loading {
+    cursor: default;
   }
 }
 
