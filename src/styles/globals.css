@@ -3,9 +3,94 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    margin: 0;
+    height: 100%;
+  }
   body {
+    min-height: 100%;
     @apply bg-slate-800;
     @apply text-yellow-50;
+  }
+
+  .primary-btn {
+    @apply w-40 m-auto  bg-purple-500 hover:bg-purple-700 text-white py-2 px-4 rounded;
+  }
+
+  .btn-state-default {
+    cursor: pointer;
+  }
+
+  .btn-state-loading {
+    cursor: default;
+  }
+}
+
+@layer toast {
+  /* Toast */
+  #toast {
+    @apply text-gray-800;
+    visibility: hidden;
+    min-width: 120px;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 46%;
+    top: 30px;
+    font-size: 17px;
+  }
+
+  #toast.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+
+  @-webkit-keyframes fadein {
+    from {
+      top: 0;
+      opacity: 0;
+    }
+    to {
+      top: 30px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadein {
+    from {
+      top: 0;
+      opacity: 0;
+    }
+    to {
+      top: 30px;
+      opacity: 1;
+    }
+  }
+
+  @-webkit-keyframes fadeout {
+    from {
+      top: 30px;
+      opacity: 1;
+    }
+    to {
+      top: 0;
+      opacity: 0;
+    }
+  }
+
+  @keyframes fadeout {
+    from {
+      top: 30px;
+      opacity: 1;
+    }
+    to {
+      top: 0;
+      opacity: 0;
+    }
   }
 }
 
